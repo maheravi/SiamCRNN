@@ -2,12 +2,13 @@ import cv2 as cv
 
 from osgeo import gdal
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 from util.data_prepro import stad_img
 
 from SiamCRNN import SiamCRNN
 import time
-
 
 
 def load_data(path_X, path_Y):
@@ -31,7 +32,13 @@ def infer_result():
     patch_sz = 5
     batch_size = 1000
 
-    img_X, img_Y = load_data("/content/data/before", "/content/data/after")
+    # img_X, img_Y = load_data("/content/data/before", "/content/data/after")
+    img_X = tf.keras.utils.load_img("/content/data/before/1001.png", target_size=(224, 224))
+    img_X = tf.keras.utils.img_to_array(img_X)
+    img_X = np.transpose(img_X, [1, 2, 0])
+    img_Y = tf.keras.utils.load_img("/content/data/after/1001.png", target_size=(224, 224))
+    img_Y = tf.keras.utils.img_to_array(img_Y)
+    img_Y = np.transpose(img_Y, [1, 2, 0])
     img_X = np.pad(img_X, ((2, 2), (2, 2), (0, 0)), 'constant')
     img_Y = np.pad(img_Y, ((2, 2), (2, 2), (0, 0)), 'constant')
     img_height, img_width, channel = img_X.shape  # image width
