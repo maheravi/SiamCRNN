@@ -1,6 +1,6 @@
 import cv2 as cv
 
-import gdal
+from osgeo import gdal
 import numpy as np
 import tensorflow as tf
 from util.data_prepro import stad_img
@@ -31,7 +31,7 @@ def infer_result():
     patch_sz = 5
     batch_size = 1000
 
-    img_X, img_Y = load_data()
+    img_X, img_Y = load_data("/content/data/before", "/content/data/after")
     img_X = np.pad(img_X, ((2, 2), (2, 2), (0, 0)), 'constant')
     img_Y = np.pad(img_Y, ((2, 2), (2, 2), (0, 0)), 'constant')
     img_height, img_width, channel = img_X.shape  # image width

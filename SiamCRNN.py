@@ -1,5 +1,5 @@
 import tensorflow as tf
-from net_util import conv_2d, max_pool_2d, avg_pool_2d, fully_connected
+from util.net_util import conv_2d, max_pool_2d, avg_pool_2d, fully_connected
 
 
 class SiamCRNN(object):

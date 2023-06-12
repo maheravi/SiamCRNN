@@ -1,5 +1,5 @@
 import tensorflow as tf
-from tensorflow.layers import batch_normalization
+from tensorflow.keras.layers import BatchNormalization as batch_normalization
 
 _EPSILON = 1e-7
 
